@@ -1,2 +1,2 @@
 # 冒泡排序动画演示，入口在main.py中
-![image](https://github.com/859900546/Bubble_Sort_UI/assets/140869051/7a5ad86a-ee98-40c2-84b9-6a4a8cb06f80)
+![image](https://github.com/859900546/Bubble_Sort_UI/assets/140869051/5c96c129-78c4-41e4-a598-e190804ea91a)
