@@ -58,12 +58,7 @@ class Thread_sort(QtCore.QThread):
         time.sleep(1)
         cnt = 0
         for i in range(self.parent.number_cnt - 1):
-            # if i > 0:
-            #     self.parent.labelList[i].setbackground('blue')
-            #     self.parent.labelList[i - 1].setbackground('black')
-            # else:
-            #     self.parent.labelList[i].setbackground('blue')
-            for j in range(0, self.parent.number_cnt - i - 1):
+            for j in range(self.parent.number_cnt - i - 1):
                 if self.parent.number_list[j] < self.parent.number_list[j + 1]:
                     self.parent.ui.pushButton.setText(f'正在排序第{i + 1}趟 第{j + 1}次排序 共{cnt + 1}次')
                     time.sleep(0.01)
@@ -73,6 +68,7 @@ class Thread_sort(QtCore.QThread):
                     time.sleep(1)
 
         self.parent.ui.pushButton.setText(f'排序完成！')
+        time.sleep(0.01)
         self.parent.ui.pushButton.setStyleSheet('background-color: green; color: black;'
                                                 'border: 2px solid #000000; border-radius: 10px; padding: 7px;')
 
@@ -89,7 +85,7 @@ class Window(QWidget):
         self.ui = un
         self.ui.setupUi(self)
         self.setWindowTitle('冒泡排序')
-        s = QIcon('../src/icon.ico')
+        s = QIcon('src/icon.ico')
         self.setWindowIcon(s)
         # self.ui.horizontalLayout_2.setAlignment(Qt.AlignLeft)
         self.ui.horizontalLayout_2.setAlignment(Qt.AlignCenter)
@@ -112,7 +108,6 @@ class Window(QWidget):
         self.number_cnt = None
         self.avg = None
         self.normalized_data = None
-
 
     def init(self, n: int, arr: list) -> None:
         self.avg = sum(arr) / n
@@ -170,16 +165,18 @@ class Window(QWidget):
         self.labelList[i].Height = self.labelList[j].Height
         self.labelList[i].Text = self.labelList[j].Text
         self.labelList[i].setHeight(self.labelList[j].Height)
+        time.sleep(0.006)
         self.labelList[i].setText(str(self.labelList[j].Text))
         time.sleep(0.01)
         self.labelList[j].Height = th
         self.labelList[j].Text = str(ts)
         self.labelList[j].setHeight(th)
+        time.sleep(0.006)
         self.labelList[j].setText(str(ts))
 
         time.sleep(0.01)  # 动画效果
         self.labelList[i].setbackground('red')
-        time.sleep(0.01)
+        time.sleep(0.005)
         self.labelList[j].setbackground('blue')
         time.sleep(0.7)
         if int(self.labelList[i].Text) < 0:
@@ -197,7 +194,7 @@ class Window(QWidget):
         # y = x * 1080*(-0.025x^2+1.73x-8.2) // self.Yscreen + 10
         #
         return int(min(self.Yscreen * 2.5,
-                   abs(x) * 1080 * max(- 0.025 * (t ** 2) + 1.65 * t - 8.2, 2) // self.Yscreen + 10))
+                       abs(x) * 1080 * max(- 0.025 * (t ** 2) + 1.65 * t - 8.2, 2) // self.Yscreen + 15))
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Return:
